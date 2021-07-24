@@ -16,17 +16,91 @@ namespace StoreWorks.Repositories
 
         public List<Employee> GetAllEmployees()
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT
+                            Id, FirebaseUserId, EmployeeName, Email, CanManage
+                        FROM Employees";
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    List<Employee> employees = new List<Employee>();
+
+                    while (reader.Read())
+                    {
+                        employees.Add(new Employee()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            EmployeeName = DbUtils.GetString(reader, "EmployeeName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            CanManage = DbUtils.IsNotDbNull(reader, "CanManage")
+                        });
+                    }
+                    reader.Close();
+                    return employees;
+                }
+            }
         }
 
         public Employee GetEmployeeById(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, FirebaseUserId, EmployeeName, Email, CanManage
+                        FROM Employees
+                        WHERE Id = @id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    Employee employee = null;
+
+                    if (reader.Read())
+                    {
+                        employee = new Employee()
+                        {
+                            Id = id,
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            EmployeeName = DbUtils.GetString(reader, "EmployeeName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            CanManage = DbUtils.IsNotDbNull(reader, "CanManage")
+                        }
+                    }
+                    reader.Close();
+                    return employee;
+                }
+            }
         }
 
         public void AddEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Employees
+                            (FirebaseUserId, EmployeeName, Email, CanManage)
+                        OUTPUT INSERTED.ID
+                        VALUES
+                            (@firebaseUserId, @employeeName, @email, @canManage)";
+                    DbUtils.AddParameter(cmd, "@firebaseUserId", employee.FirebaseUserId);
+                    DbUtils.AddParameter(cmd, "@employeeName", employee.EmployeeName);
+                    DbUtils.AddParameter(cmd, "@email", employee.Email);
+                    DbUtils.AddParameter(cmd, "@canManage", employee.CanManage);
+
+                    employee.Id = (int)cmd.ExecuteScalar();
+                }
+            }
         }
 
         public void EditEmployee(Employee employee)
