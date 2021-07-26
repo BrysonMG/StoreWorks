@@ -96,7 +96,14 @@ namespace StoreWorks.Repositories
                     DbUtils.AddParameter(cmd, "@firebaseUserId", employee.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@employeeName", employee.EmployeeName);
                     DbUtils.AddParameter(cmd, "@email", employee.Email);
-                    DbUtils.AddParameter(cmd, "@canManage", employee.CanManage);
+                    if (employee.CanManage)
+                    {
+                        DbUtils.AddParameter(cmd, "@canManage", 1);
+                    }
+                    else
+                    {
+                        DbUtils.AddParameter(cmd, "@canManage", 0);
+                    }
 
                     employee.Id = (int)cmd.ExecuteScalar();
                 }
@@ -117,7 +124,14 @@ namespace StoreWorks.Repositories
                             CanManage = @canManage
                         WHERE Id = @id";
                     DbUtils.AddParameter(cmd, "@employeeName", employee.EmployeeName);
-                    DbUtils.AddParameter(cmd, "@canManage", employee.CanManage);
+                    if (employee.CanManage)
+                    {
+                        DbUtils.AddParameter(cmd, "@canManage", 1);
+                    }
+                    else
+                    {
+                        DbUtils.AddParameter(cmd, "@canManage", 0);
+                    }
                     DbUtils.AddParameter(cmd, "@id", employee.Id);
 
                     cmd.ExecuteNonQuery();
