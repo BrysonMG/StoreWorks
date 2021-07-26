@@ -16,7 +16,8 @@ SET IDENTITY_INSERT [Employees] ON
 		(9, 'TZaG9YYO2If1nOSDIDlWqeIDKbE2', 'Nicholas King', 'nicholas89k@demo.com', 0),
 		(10, 'bCAQi1pUNHMyRp495n9iONgtjIP2', 'Emma Beard', 'msemma.b@demo.com', 0),
 		(11, 'QVxebHfaHHcqRig1Xs7YGgee8BP2', 'Leo Miller', 'leo-miller1998@demo.com', 0),
-		(12, 'HgHNvkxdHmW8KqOTCD8Vl08R3en2', 'James Bond', 'jamesb007@demo.com', 0)
+		(12, 'HgHNvkxdHmW8KqOTCD8Vl08R3en2', 'James Bond', 'jamesb007@demo.com', 0),
+        (13, 'terminated', 'Former Employee', 'Former Employee', 0)
 SET IDENTITY_INSERT [Employees] OFF
 
 
@@ -38,7 +39,8 @@ SET IDENTITY_INSERT [Categories] ON
 		(12, 'Apparel'),
 		(13, 'Groceries'),
 		(14, 'Cleaning'),
-		(15, 'Home Goods')
+		(15, 'Home Goods'),
+        (16, 'Deleted')
 SET IDENTITY_INSERT [Categories] OFF
 
 
@@ -46,7 +48,7 @@ SET IDENTITY_INSERT [Products] ON
 	INSERT INTO [Products]
 		(Id, CategoryId, ProductName, Quantity, Cost, SellPrice)
 	VALUES
-		(1, 12, 'Mens White Polo', 10, 19.89, 22.98),
+		(1, 16, 'Deleted Product', 0, 0.00, 0.00),
 		(2, 1, 'Toothpaste Twin Pack', 16, 4.26, 6.50),
 		(3, 3, '20lb Dry Dog Food', 4, 13.44, 15.98),
 		(4, 10, 'Toaster Oven', 7, 212.66, 235.00),
@@ -65,7 +67,7 @@ SET IDENTITY_INSERT [Sales] ON
 		(Id, ProductId, EmployeeId, SaleQuantity, SaleDate, SaleTotal)
 	VALUES
 		(1, 5, 3, 1, '2021-07-20 13:43:21.000', 499.99),
-		(2, 1, 11, 4, '2021-07-21 09:32:55.000', 91.92),
+		(2, 3, 11, 4, '2021-07-21 09:32:55.000', 63.92),
 		(3, 8, 10, 2, '2021-07-21 09:45:19.000', 7.80)
 SET IDENTITY_INSERT [Sales] OFF
 

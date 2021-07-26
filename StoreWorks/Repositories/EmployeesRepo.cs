@@ -46,7 +46,7 @@ namespace StoreWorks.Repositories
             }
         }
 
-        public Employee GetEmployeeById(int id)
+        public Employee GetEmployeeByFirebaseId(string firebaseId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -56,8 +56,8 @@ namespace StoreWorks.Repositories
                     cmd.CommandText = @"
                         SELECT Id, FirebaseUserId, EmployeeName, Email, CanManage
                         FROM Employees
-                        WHERE Id = @id";
-                    DbUtils.AddParameter(cmd, "@id", id);
+                        WHERE FirebaseUserId = @id";
+                    DbUtils.AddParameter(cmd, "@id", firebaseId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -67,7 +67,7 @@ namespace StoreWorks.Repositories
                     {
                         employee = new Employee()
                         {
-                            Id = id,
+                            Id = DbUtils.GetInt(reader, "Id"),
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                             EmployeeName = DbUtils.GetString(reader, "EmployeeName"),
                             Email = DbUtils.GetString(reader, "Email"),
@@ -136,13 +136,13 @@ namespace StoreWorks.Repositories
                   //to implement active & deactivated Employees to retain their information
                     cmd.CommandText = @"
                         UPDATE Sales
-                            SET EmployeeId = 123456789
+                            SET EmployeeId = 13
                             WHERE EmployeeId = @id
                         UPDATE Received
-                            SET EmployeeId = 123456789
+                            SET EmployeeId = 13
                             WHERE EmployeeId = @id
                         UPDATE Shrinkage
-                            SET EmployeeId = 123456789
+                            SET EmployeeId = 13
                             WHERE EmployeeId = @id
                         DELETE FROM Employees
                         WHERE Id = @id";

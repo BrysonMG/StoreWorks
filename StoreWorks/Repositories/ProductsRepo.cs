@@ -41,8 +41,19 @@ namespace StoreWorks.Repositories
             {
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
-                {
+                { //Before deleting the product, change all of its sales, received,
+                  //and shrinkage to "Deleted Product". In the future, change this
+                  //to implement active & deactivated Products to retain their information
                     cmd.CommandText = @"
+                        UPDATE Sales
+                            SET ProductId = 1
+                            WHERE ProductId = @id
+                        UPDATE Received
+                            SET ProductId = 1
+                            WHERE ProductId = @id
+                        UPDATE Shrinkage
+                            SET ProductId = 1
+                            WHERE ProductId = @id
                         DELETE FROM Products
                         WHERE Id = @id";
                     DbUtils.AddParameter(cmd, "@id", id);
