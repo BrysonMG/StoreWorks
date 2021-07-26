@@ -78,8 +78,6 @@ let _onLoginStatusChangedHandler = () => {
 
 // This function acts as a link between this module.
 // It sets up the mechanism for notifying the react app when the user logs in or out.
-// You might argue that this is all wrong and you might be right, but I promise there are reasons,
-//   and at least this mess is relatively contained in one place.
 export const onLoginStatusChange = (onLoginStatusChangedHandler) => {
 
     // Here we take advantage of the firebase 'onAuthStateChanged' observer in a couple of different ways.
