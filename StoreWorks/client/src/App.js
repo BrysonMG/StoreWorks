@@ -3,6 +3,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import { onLoginStatusChange } from './modules/authManager';
+import firebase from 'firebase';
+import "firebase/auth";
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -10,6 +12,8 @@ export const App = () => {
   if (isLoggedIn === null) {
     return null;
   }
+
+  //console.log(firebase.auth().currentUser)
 
   useEffect(() => {
     onLoginStatusChange(setIsLoggedIn);

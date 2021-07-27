@@ -72,7 +72,7 @@ namespace StoreWorks.Repositories
                             EmployeeName = DbUtils.GetString(reader, "EmployeeName"),
                             Email = DbUtils.GetString(reader, "Email"),
                             CanManage = DbUtils.IsNotDbNull(reader, "CanManage")
-                        }
+                        };
                     }
                     reader.Close();
                     return employee;

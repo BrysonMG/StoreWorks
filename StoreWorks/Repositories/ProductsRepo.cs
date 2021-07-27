@@ -155,3 +155,5 @@ namespace StoreWorks.Repositories
                 }
             }
         }
+    }
+}

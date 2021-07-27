@@ -6,7 +6,7 @@ const _apiUrl = "/api/employees";
 
 const _doesUserExist = (firebaseUserId) => {
     return getToken().then((token) =>
-        fetch(`${_apiUrl}/DoesUserExist/${firebaseUserId}`, {
+        fetch(`${_apiUrl}/EmployeeExists/${firebaseUserId}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
@@ -14,7 +14,7 @@ const _doesUserExist = (firebaseUserId) => {
         }).then(resp => resp.ok));
 };
 
-const _saveUser = (userProfile) => {
+const _saveUser = (employee) => {
     return getToken().then((token) =>
         fetch(_apiUrl, {
             method: "POST",
@@ -22,7 +22,7 @@ const _saveUser = (userProfile) => {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(userProfile)
+            body: JSON.stringify(employee)
         }).then(resp => resp.json()));
 };
 
