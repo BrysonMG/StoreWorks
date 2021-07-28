@@ -36,6 +36,13 @@ namespace StoreWorks.Controllers
         }
 
         [Authorize]
+        [HttpGet("email/{email}")]
+        public IActionResult GetEmployeeByEmail(string email)
+        {
+            return Ok(_employeesRepo.GetEmployeeByEmail(email));
+        }
+
+        [Authorize]
         [HttpGet("EmployeeExists/{firebaseId}")]
         public IActionResult EmployeeExists(string firebaseId)
         {

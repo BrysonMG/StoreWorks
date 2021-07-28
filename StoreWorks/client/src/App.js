@@ -5,15 +5,12 @@ import './App.css';
 import { onLoginStatusChange } from './modules/authManager';
 import firebase from 'firebase';
 import "firebase/auth";
+import { Header } from './components/Header';
+import { Login } from './components/Login';
+import { ApplicationViews } from './ApplicationViews';
 
 export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-
-  if (isLoggedIn === null) {
-    return null;
-  }
-
-  //console.log(firebase.auth().currentUser)
 
   useEffect(() => {
     onLoginStatusChange(setIsLoggedIn);
@@ -21,22 +18,8 @@ export const App = () => {
 
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Header isLoggedIn={isLoggedIn} />
+      <ApplicationViews isLoggedIn={isLoggedIn} />
     </Router>
   );
 }

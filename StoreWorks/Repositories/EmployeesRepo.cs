@@ -80,6 +80,40 @@ namespace StoreWorks.Repositories
             }
         }
 
+        public Employee GetEmployeeByEmail(string email)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, FirebaseUserId, EmployeeName, Email, CanManage
+                        FROM Employees
+                        WHERE Email = @email";
+                    DbUtils.AddParameter(cmd, "@email", email);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    Employee employee = null;
+
+                    if (reader.Read())
+                    {
+                        employee = new Employee()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            EmployeeName = DbUtils.GetString(reader, "EmployeeName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            CanManage = DbUtils.IsNotDbNull(reader, "CanManage")
+                        };
+                    }
+                    reader.Close();
+                    return employee;
+                }
+            }
+        }
+
         public void AddEmployee(Employee employee)
         {
             using (SqlConnection conn = Connection)

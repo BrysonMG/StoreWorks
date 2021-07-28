@@ -22,6 +22,16 @@ export const getEmployee = firebaseId => {
         }).then(res => res.json()));
 }
 
+export const getEmployeeByEmail = email => {
+    return getToken().then(token =>
+        fetch(`${apiUrl}/email/${email}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(res => res.json()));
+}
+
 export const addEmployee = employee => {
     return getToken().then(token =>
         fetch(apiUrl, {

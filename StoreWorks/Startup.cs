@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using StoreWorks.Repositories;
+using StoreWorks.Repositories.Interfaces;
 
 namespace StoreWorks
 {
@@ -21,6 +23,12 @@ namespace StoreWorks
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IEmployeesRepo, EmployeesRepo>();
+            services.AddTransient<ICategoriesRepo, CategoriesRepo>();
+            services.AddTransient<IProductsRepo, ProductsRepo>();
+            services.AddTransient<ISalesRepo, SalesRepo>();
+            services.AddTransient<IReceivedRepo, ReceivedRepo>();
+            services.AddTransient<IShrinkRepo, ShrinkRepo>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
