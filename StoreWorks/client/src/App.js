@@ -1,25 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import { onLoginStatusChange } from './modules/authManager';
+import { getEmployeeByEmail } from './modules/employeeManager'
 import firebase from 'firebase';
-import "firebase/auth";
 import { Header } from './components/Header';
-import { Login } from './components/Login';
 import { ApplicationViews } from './ApplicationViews';
 
 export const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userCanManage, setUserCanManage] = useState(false);
+
+  const getCanManage = () => {
+    const user = firebase.auth().currentUser;
+    if (user !== null) {
+      getEmployeeByEmail(user.email)
+        .then(employee => {
+          setUserCanManage(employee.canManage);
+        })
+    }
+  }
+
 
   useEffect(() => {
     onLoginStatusChange(setIsLoggedIn);
   }, [])
 
+  useEffect(() => {
+    getCanManage();
+  }, [])
+
   return (
     <Router>
-      <Header isLoggedIn={isLoggedIn} />
-      <ApplicationViews isLoggedIn={isLoggedIn} />
+      <Header isLoggedIn={isLoggedIn} canManage={userCanManage} />
+      <ApplicationViews isLoggedIn={isLoggedIn} canManage={userCanManage} />
     </Router>
   );
 }
