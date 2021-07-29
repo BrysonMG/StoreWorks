@@ -8,6 +8,19 @@ namespace StoreWorks.Utils
     /// </summary>
     public static class DbUtils
     {
+        public static bool GetBool(SqlDataReader reader, string column)
+        {
+            var ordinal = reader.GetOrdinal(column);
+            if (reader.GetBoolean(ordinal))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         ///  Get a string from a data reader object and gracefully handle NULL values
         /// </summary>

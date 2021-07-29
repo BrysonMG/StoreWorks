@@ -3,8 +3,25 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Login } from './components/Login';
 import firebase from 'firebase';
 import { EmployeeWelcome } from './components/EmployeeWelcome';
+import { getEmployeeByEmail } from './modules/employeeManager';
 
-export const ApplicationViews = ({ isLoggedIn, canManage }) => {
+export const ApplicationViews = ({ isLoggedIn }) => {
+    const [userCanManage, setUserCanManage] = useState(false);
+
+    const getCanManage = () => {
+        const user = firebase.auth().currentUser;
+        if (user !== null) {
+            getEmployeeByEmail(user.email)
+                .then(employee => {
+                    setUserCanManage(employee.canManage);
+                })
+        }
+    }
+
+    useEffect(() => {
+        getCanManage();
+    })
+
     return (
         <main>
             <Switch>
@@ -13,7 +30,7 @@ export const ApplicationViews = ({ isLoggedIn, canManage }) => {
                         if (!isLoggedIn) {
                             return (<Redirect to="/Login" />)
                         } else {
-                            if (canManage) {
+                            if (userCanManage) {
                                 //return (<Summary />)
                                 return (<h1>MANAGER</h1>)
                             } else {

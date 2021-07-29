@@ -105,7 +105,7 @@ namespace StoreWorks.Repositories
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                             EmployeeName = DbUtils.GetString(reader, "EmployeeName"),
                             Email = DbUtils.GetString(reader, "Email"),
-                            CanManage = DbUtils.IsNotDbNull(reader, "CanManage")
+                            CanManage = DbUtils.GetBool(reader, "CanManage")
                         };
                     }
                     reader.Close();

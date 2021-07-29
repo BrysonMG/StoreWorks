@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { login } from '../modules/authManager';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';

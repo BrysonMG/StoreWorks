@@ -1,18 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink as RRNavLink } from "react-router-dom";
 import { logout } from '../modules/authManager';
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink } from "reactstrap";
+import { Navbar, Nav, NavItem, NavLink } from "reactstrap";
+import { getEmployeeByEmail } from '../modules/employeeManager';
+import firebase from "firebase";
 
-export const NavMenu = ({ isLoggedIn, canManage }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
+export const NavMenu = () => {
+    const [userCanManage, setUserCanManage] = useState(false);
+
+    const getCanManage = () => {
+        const user = firebase.auth().currentUser;
+        if (user !== null) {
+            getEmployeeByEmail(user.email)
+                .then(employee => {
+                    setUserCanManage(employee.canManage);
+                })
+        }
+    }
+
+    useEffect(() => {
+        getCanManage();
+    }, [])
+
     return (
         <>
             <div className="navMenu">
                 <Navbar>
                     <Nav className="navOptions" navbar>
                         <NavItem>
-                            <NavLink tag={RRNavLink} to="/">{canManage ? 'Summary' : 'Welcome'}</NavLink>
+                            <NavLink tag={RRNavLink} to="/">{userCanManage ? 'Summary' : 'Welcome'}</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink tag={RRNavLink} to="/Sales">Sales</NavLink>
@@ -23,7 +39,7 @@ export const NavMenu = ({ isLoggedIn, canManage }) => {
                         <NavItem>
                             <NavLink tag={RRNavLink} to="/Shrinkage">Shrinkage</NavLink>
                         </NavItem>
-                        {canManage &&
+                        {userCanManage &&
                             <>
                                 <NavItem>
                                     <NavLink tag={RRNavLink} to="ProductMgmt">Product Management</NavLink>
@@ -34,7 +50,7 @@ export const NavMenu = ({ isLoggedIn, canManage }) => {
                             </>
                         }
                         <NavItem>
-                            <a style={{ cursor: "pointer" }} onClick={logout} >Logout</a>
+                            <button style={{ cursor: "pointer" }} onClick={logout} >Logout</button>
                         </NavItem>
                     </Nav>
                 </Navbar>

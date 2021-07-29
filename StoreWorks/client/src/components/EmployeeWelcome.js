@@ -3,7 +3,7 @@ import { getEmployeeByEmail } from '../modules/employeeManager';
 import firebase from 'firebase';
 
 export const EmployeeWelcome = () => {
-    const [currentEmployee, setCurrentEmployee] = useState(null);
+    const [currentEmployee, setCurrentEmployee] = useState({ employeeName: "" });
 
     const getEmployee = () => {
         if (firebase.auth().currentUser !== null) {
