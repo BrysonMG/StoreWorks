@@ -5,6 +5,8 @@ import firebase from 'firebase';
 import { EmployeeWelcome } from './components/EmployeeWelcome';
 import { getEmployeeByEmail } from './modules/employeeManager';
 import { Sales } from './components/Sales';
+import { Receiving } from './components/Receiving';
+import { Shrinkage } from './components/Shrinkage';
 
 export const ApplicationViews = ({ isLoggedIn }) => {
     const [userCanManage, setUserCanManage] = useState(false);
@@ -45,6 +47,12 @@ export const ApplicationViews = ({ isLoggedIn }) => {
                 </Route>
                 <Route exact path="/Sales">
                     {!isLoggedIn ? <Redirect to="/" /> : <Sales />}
+                </Route>
+                <Route exact path="/Receiving">
+                    {!isLoggedIn ? <Redirect to="/" /> : <Receiving />}
+                </Route>
+                <Route exact path="/Shrinkage">
+                    {!isLoggedIn ? <Redirect to="/" /> : <Shrinkage />}
                 </Route>
             </Switch>
         </main>

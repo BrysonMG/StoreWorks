@@ -2,16 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { getAllProducts, editProduct } from "../modules/productManager";
 import firebase from "firebase";
 import { getEmployeeByEmail } from "../modules/employeeManager";
-import { addSale } from "../modules/saleManager";
+import { addShrink } from "../modules/shrinkManager";
 
-export const Sales = () => {
+export const Shrinkage = () => {
     const [show, setShow] = useState(false);
     const [products, setProducts] = useState([]);
     const [search, setSearch] = useState("");
     const wrapperRef = useRef(null);
-    const [selectedProduct, setSelectedProduct] = useState({ productName: "", quantity: 0, sellPrice: 0.00 })
+    const [selectedProduct, setSelectedProduct] = useState({ productName: "", quantity: 0, cost: 0.00 })
     const [quantity, setQuantity] = useState("");
-    const [pricePer, setPricePer] = useState("");
+    const [costPer, setCostPer] = useState("");
 
     const handleClickOutside = event => {
         const { current: wrap } = wrapperRef;
@@ -31,25 +31,25 @@ export const Sales = () => {
         })
     }
 
-    const addSaleToDb = () => {
+    const addShrinkToDb = () => {
         const userEmail = firebase.auth().currentUser.email;
         getEmployeeByEmail(userEmail)
             .then(employee => {
-                const saleObj = {
+                const shrinkObj = {
                     ProductId: selectedProduct.id,
                     EmployeeId: employee.id,
-                    SaleQuantity: quantity,
-                    SaleTotal: (quantity * pricePer)
+                    ShrinkQuantity: quantity,
+                    ShrinkTotal: (quantity * costPer)
                 }
-                addSale(saleObj);
-                reduceProductQuantity()
+                addShrink(shrinkObj);
+                reduceProductQuantity();
                 clearForm();
             })
     }
 
     const clearForm = () => {
-        setSelectedProduct({ productName: "", quantity: 0, sellPrice: 0.00 });
-        setPricePer("");
+        setSelectedProduct({ productName: "", quantity: 0, cost: 0.00 });
+        setCostPer("");
         setQuantity("");
         setSearch("")
     }
@@ -74,7 +74,7 @@ export const Sales = () => {
 
     return (
         <>
-            <h3>Sales is for logging in products that have been sold.</h3>
+            <h3>Shrinkage is for logging damaged, lost, or stolen products.</h3>
             <div ref={wrapperRef}>
                 <label>Select a Product: </label>
                 <input
@@ -97,7 +97,7 @@ export const Sales = () => {
                                     <div
                                         onClick={() => {
                                             setSelectedProduct(product);
-                                            setPricePer(product.sellPrice);
+                                            setCostPer(product.cost);
                                             updateProductSearch(product.productName);
                                         }}
                                         className="autoOption"
@@ -120,21 +120,21 @@ export const Sales = () => {
                 <span hidden={selectedProduct.productName === ""}> ({selectedProduct.quantity} On Hand)</span>
             </div>
             <div className="pricePerBox">
-                <label>Price Per Unit: </label>
-                <input placeholder="0.00" value={pricePer} onChange={event => {
-                    setPricePer(event.target.value);
+                <label>Cost Per Unit: </label>
+                <input placeholder="0.00" value={costPer} onChange={event => {
+                    setCostPer(event.target.value);
                 }} />
             </div>
             <br />
             <div className="totalBox">
-                <label>Total: </label>
-                <span className="noModify">${(quantity * pricePer)?.toFixed(2)}</span>
+                <label>Total Loss: </label>
+                <span className="noModify">${(quantity * costPer)?.toFixed(2)}</span>
             </div>
             <div className="submitClear">
                 <button onClick={() => {
-                    addSaleToDb()
-                    alert("Sale Logged Successfully!")
-                }}>Confirm Sale</button>
+                    addShrinkToDb()
+                    alert("Shrink Logged Successfully!")
+                }}>Confirm Shrink</button>
                 <button onClick={() => {
                     clearForm()
                 }}>Clear</button>
