@@ -23,11 +23,10 @@ namespace StoreWorks.Repositories
                             ProductId, EmployeeId, ShrinkQuantity, ShrinkDate, ShrinkTotal)
                         OUTPUT INSERTED.ID
                         VALUES (
-                            @productId, @employeeId, @shrinkQuantity, @shrinkDate, @shrinkTotal)";
+                            @productId, @employeeId, @shrinkQuantity, GETDATE(), @shrinkTotal)";
                     DbUtils.AddParameter(cmd, "@productId", shrink.ProductId);
                     DbUtils.AddParameter(cmd, "@employeeId", shrink.EmployeeId);
                     DbUtils.AddParameter(cmd, "@shrinkQuantity", shrink.ShrinkQuantity);
-                    DbUtils.AddParameter(cmd, "@shrinkDate", shrink.ShrinkDate);
                     DbUtils.AddParameter(cmd, "@shrinkTotal", shrink.ShrinkTotal);
 
                     shrink.Id = (int)cmd.ExecuteScalar();

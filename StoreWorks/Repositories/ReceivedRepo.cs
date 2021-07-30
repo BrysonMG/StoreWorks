@@ -23,11 +23,10 @@ namespace StoreWorks.Repositories
                             (ProductId, EmployeeId, ReceivedQuantity, ReceivedDate, ReceivedTotal)
                         OUTPUT INSERTED.ID
                         VALUES
-                            (@productId, @employeeId, @receivedQuantity, @receivedDate, @receivedTotal)";
+                            (@productId, @employeeId, @receivedQuantity, GETDATE(), @receivedTotal)";
                     DbUtils.AddParameter(cmd, "@productId", received.ProductId);
                     DbUtils.AddParameter(cmd, "@employeeId", received.EmployeeId);
                     DbUtils.AddParameter(cmd, "@receivedQuantity", received.ReceivedQuantity);
-                    DbUtils.AddParameter(cmd, "@receivedDate", received.ReceivedDate);
                     DbUtils.AddParameter(cmd, "@receivedTotal", received.ReceivedTotal);
 
                     received.Id = (int)cmd.ExecuteScalar();

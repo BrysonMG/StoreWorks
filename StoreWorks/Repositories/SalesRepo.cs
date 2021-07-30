@@ -25,11 +25,10 @@ namespace StoreWorks.Repositories
                         OUTPUT INSERTED.ID
                         VALUES (
                             @productId, @employeeId, @saleQuantity,
-                            @saleDate, @saleTotal )";
+                            GETDATE(), @saleTotal )";
                     DbUtils.AddParameter(cmd, "@productId", sale.ProductId);
                     DbUtils.AddParameter(cmd, "@employeeId", sale.EmployeeId);
                     DbUtils.AddParameter(cmd, "@saleQuantity", sale.SaleQuantity);
-                    DbUtils.AddParameter(cmd, "@saleDate", sale.SaleDate);
                     DbUtils.AddParameter(cmd, "@saleTotal", sale.SaleTotal);
 
                     sale.Id = (int)cmd.ExecuteScalar();

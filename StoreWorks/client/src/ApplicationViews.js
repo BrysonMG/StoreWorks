@@ -4,6 +4,7 @@ import { Login } from './components/Login';
 import firebase from 'firebase';
 import { EmployeeWelcome } from './components/EmployeeWelcome';
 import { getEmployeeByEmail } from './modules/employeeManager';
+import { Sales } from './components/Sales';
 
 export const ApplicationViews = ({ isLoggedIn }) => {
     const [userCanManage, setUserCanManage] = useState(false);
@@ -41,6 +42,9 @@ export const ApplicationViews = ({ isLoggedIn }) => {
                 </Route>
                 <Route exact path="/Login">
                     {isLoggedIn ? <Redirect to="/" /> : <Login />}
+                </Route>
+                <Route exact path="/Sales">
+                    {!isLoggedIn ? <Redirect to="/" /> : <Sales />}
                 </Route>
             </Switch>
         </main>
