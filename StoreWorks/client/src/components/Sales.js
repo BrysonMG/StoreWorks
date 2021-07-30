@@ -10,8 +10,8 @@ export const Sales = () => {
     const [search, setSearch] = useState("");
     const wrapperRef = useRef(null);
     const [selectedProduct, setSelectedProduct] = useState({ productName: "", quantity: 0, sellPrice: 0.00 })
-    const [quantity, setQuantity] = useState(null);
-    const [pricePer, setPricePer] = useState(null);
+    const [quantity, setQuantity] = useState("");
+    const [pricePer, setPricePer] = useState("");
 
     const handleClickOutside = event => {
         const { current: wrap } = wrapperRef;
@@ -42,12 +42,15 @@ export const Sales = () => {
                     SaleTotal: (quantity * pricePer)
                 }
                 addSale(saleObj);
-                setSelectedProduct({ productName: "", quantity: 0, sellPrice: 0.00 });
-                setPricePer(null);
-                setQuantity(null);
-                setSearch("")
+                clearForm();
             })
-        return true
+    }
+
+    const clearForm = () => {
+        setSelectedProduct({ productName: "", quantity: 0, sellPrice: 0.00 });
+        setPricePer("");
+        setQuantity("");
+        setSearch("")
     }
 
     useEffect(() => {
@@ -121,8 +124,11 @@ export const Sales = () => {
             <div className="submitClear">
                 <button onClick={() => {
                     addSaleToDb()
+                    alert("Sale Logged Successfully!")
                 }}>Confirm Sale</button>
-                <button>Clear</button>
+                <button onClick={() => {
+                    clearForm()
+                }}>Clear</button>
             </div>
         </>
     )
