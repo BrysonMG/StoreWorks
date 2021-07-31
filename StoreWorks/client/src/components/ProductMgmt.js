@@ -27,17 +27,21 @@ export const ProductMgmt = () => {
         <>
             <button onClick={goToAddForm}>Add New Product</button>
             <table className="productList">
-                <tr className="tableHeader">
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Cost</th>
-                    <th>Sell Price</th>
-                    <th>Profit</th>
-                    <th>Controls</th>
-                </tr>
-                {products.map(product => {
-                    return <ProductCard key={product.id} product={product} />
-                })}
+                <thead>
+                    <tr className="tableHeader">
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Cost</th>
+                        <th>Sell Price</th>
+                        <th>Profit</th>
+                        <th>Controls</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {products.map(product => {
+                        return <ProductCard key={product.id} product={product} />
+                    })}
+                </tbody>
             </table>
         </>
     )

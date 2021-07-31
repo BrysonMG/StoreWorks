@@ -42,10 +42,10 @@ export const NavMenu = () => {
                         {userCanManage &&
                             <>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="ProductMgmt">Product Management</NavLink>
+                                    <NavLink tag={RRNavLink} to="/ProductMgmt">Product Management</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={RRNavLink} to="EmployeeMgmt">Employee Management</NavLink>
+                                    <NavLink tag={RRNavLink} to="/EmployeeMgmt">Employee Management</NavLink>
                                 </NavItem>
                             </>
                         }
