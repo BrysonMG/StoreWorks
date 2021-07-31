@@ -39,7 +39,7 @@ export const ProductMgmt = () => {
                 </thead>
                 <tbody>
                     {products.map(product => {
-                        return <ProductCard key={product.id} product={product} />
+                        return <ProductCard key={product.id} product={product} getProducts={getProducts} />
                     })}
                 </tbody>
             </table>
