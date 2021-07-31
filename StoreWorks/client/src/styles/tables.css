@@ -1,0 +1,12 @@
+table, tr, th, td {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+.tableHeader {
+    background-color: rgb(151, 151, 151);
+}
+
+.tableRow {
+    background-color: rgb(219, 219, 219);
+}
