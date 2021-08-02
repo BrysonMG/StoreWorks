@@ -72,10 +72,9 @@ export const EditProductForm = () => {
             Cost: parseFloat(cost).toFixed(2),
             SellPrice: parseFloat(sellPrice).toFixed(2)
         }
-        console.log(productObj)
-        alert("Product Successfully Updated!");
         clearForm();
         editProduct(productObj);
+        alert("Product Successfully Updated!");
         history.push("/ProductMgmt");
     }
 

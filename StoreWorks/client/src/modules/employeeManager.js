@@ -46,7 +46,7 @@ export const addEmployee = employee => {
 
 export const editEmployee = employee => {
     return getToken().then(token =>
-        fetch(`${apiUrl}/${employee.id}`, {
+        fetch(`${apiUrl}/${employee.Id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
