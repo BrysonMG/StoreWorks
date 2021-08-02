@@ -31,7 +31,7 @@ export const Login = () => {
                     <Button>Login</Button>
                 </FormGroup>
                 <em>
-                    Not registered? <Link to="register">Register</Link>
+                    Not registered? <Link to="Register">Register</Link>
                 </em>
             </fieldset>
         </Form>

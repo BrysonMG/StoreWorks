@@ -10,6 +10,7 @@ import { Shrinkage } from './components/Shrinkage';
 import { ProductMgmt } from './components/ProductMgmt';
 import { AddProductForm } from './components/AddProductForm';
 import { EditProductForm } from './components/EditProductForm';
+import { Register } from './components/Register';
 
 export const ApplicationViews = ({ isLoggedIn }) => {
     const [userCanManage, setUserCanManage] = useState(false);
@@ -46,7 +47,7 @@ export const ApplicationViews = ({ isLoggedIn }) => {
                     }}
                 </Route>
                 <Route exact path="/Register">
-                    {null}
+                    {isLoggedIn ? <Redirect to="/" /> : <Register />}
                 </Route>
                 <Route exact path="/Login">
                     {isLoggedIn ? <Redirect to="/" /> : <Login />}
