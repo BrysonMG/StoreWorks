@@ -9,6 +9,7 @@ import { Receiving } from './components/Receiving';
 import { Shrinkage } from './components/Shrinkage';
 import { ProductMgmt } from './components/ProductMgmt';
 import { AddProductForm } from './components/AddProductForm';
+import { EditProductForm } from './components/EditProductForm';
 
 export const ApplicationViews = ({ isLoggedIn }) => {
     const [userCanManage, setUserCanManage] = useState(false);
@@ -68,10 +69,10 @@ export const ApplicationViews = ({ isLoggedIn }) => {
                 <Route exact path="/AddProduct">
                     {!isLoggedIn ? <Redirect to="/" /> : <AddProductForm />}
                 </Route>
-                <Route exact path="/EditProduct/:id(\d+)">
-                    {!isLoggedIn ? <Redirect to="/" /> : null}
+                <Route exact path="/EditProduct/:productId(\d+)">
+                    {!isLoggedIn ? <Redirect to="/" /> : <EditProductForm />}
                 </Route>
-                <Route exact path="/EditEmployee/:id(\d+)">
+                <Route exact path="/EditEmployee/:employeeId(\d+)">
                     {!isLoggedIn ? <Redirect to="/" /> : null}
                 </Route>
             </Switch>

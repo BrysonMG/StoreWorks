@@ -37,7 +37,7 @@ export const addProduct = product => {
 
 export const editProduct = (product) => {
     return getToken().then(token =>
-        fetch(`${apiUrl}/${product.id}`, {
+        fetch(`${apiUrl}/${product.Id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
