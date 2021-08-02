@@ -11,6 +11,7 @@ import { ProductMgmt } from './components/ProductMgmt';
 import { AddProductForm } from './components/AddProductForm';
 import { EditProductForm } from './components/EditProductForm';
 import { Register } from './components/Register';
+import { EmployeeMgmt } from './components/EmployeeMgmt';
 
 export const ApplicationViews = ({ isLoggedIn }) => {
     const [userCanManage, setUserCanManage] = useState(false);
@@ -65,7 +66,7 @@ export const ApplicationViews = ({ isLoggedIn }) => {
                     {!isLoggedIn ? <Redirect to="/" /> : <ProductMgmt />}
                 </Route>
                 <Route exact path="/EmployeeMgmt">
-                    {!isLoggedIn ? <Redirect to="/" /> : null}
+                    {!isLoggedIn ? <Redirect to="/" /> : <EmployeeMgmt />}
                 </Route>
                 <Route exact path="/AddProduct">
                     {!isLoggedIn ? <Redirect to="/" /> : <AddProductForm />}
