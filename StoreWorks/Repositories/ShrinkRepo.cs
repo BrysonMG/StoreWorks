@@ -42,7 +42,7 @@ namespace StoreWorks.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, ProductId, EmployeeId
+                        SELECT Id, ProductId, EmployeeId,
                           ShrinkQuantity, ShrinkDate, ShrinkTotal
                         FROM Shrinkage";
                     SqlDataReader reader = cmd.ExecuteReader();

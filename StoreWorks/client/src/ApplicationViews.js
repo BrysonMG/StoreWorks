@@ -13,6 +13,7 @@ import { EditProductForm } from './components/EditProductForm';
 import { Register } from './components/Register';
 import { EmployeeMgmt } from './components/EmployeeMgmt';
 import { EditEmployeeForm } from './components/EditEmployeeForm';
+import { Summary } from './components/Summary';
 
 export const ApplicationViews = ({ isLoggedIn }) => {
     const [userCanManage, setUserCanManage] = useState(false);
@@ -40,14 +41,16 @@ export const ApplicationViews = ({ isLoggedIn }) => {
                             return (<Redirect to="/Login" />)
                         } else {
                             if (userCanManage) {
-                                //return (<Summary />)
-                                return (<h1>MANAGER</h1>)
+                                return (<Summary />)
                             } else {
                                 return (<EmployeeWelcome />)
                             }
                         }
                     }}
                 </Route>
+                {/* <Route exact path="/Summary">
+                    {userCanManage ? <Summary /> : <Redirect to="/" />}
+                </Route> */}
                 <Route exact path="/Register">
                     {isLoggedIn ? <Redirect to="/" /> : <Register />}
                 </Route>
