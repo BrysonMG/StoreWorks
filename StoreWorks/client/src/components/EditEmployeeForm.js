@@ -29,7 +29,6 @@ export const EditEmployeeForm = () => {
             Email: theEmployee.email,
             CanManage: canManage
         }
-        console.log(employeeObj);
         editEmployee(employeeObj).then(() => {
             alert("Employee Successfully Updated");
             history.push("/EmployeeMgmt");

@@ -41,9 +41,10 @@ export const Shrinkage = () => {
                     ShrinkQuantity: quantity,
                     ShrinkTotal: (quantity * costPer)
                 }
-                addShrink(shrinkObj);
-                reduceProductQuantity();
-                clearForm();
+                addShrink(shrinkObj).then(() => {
+                    reduceProductQuantity();
+                    clearForm();
+                })
             })
     }
 
@@ -57,8 +58,9 @@ export const Shrinkage = () => {
     const reduceProductQuantity = () => {
         const newQuantityProduct = { ...selectedProduct }
         newQuantityProduct.quantity -= parseInt(quantity);
-        editProduct(newQuantityProduct);
-        getProducts();
+        editProduct(newQuantityProduct).then(() => {
+            getProducts();
+        })
     }
 
     useEffect(() => {
@@ -70,7 +72,7 @@ export const Shrinkage = () => {
 
     useEffect(() => {
         getProducts();
-    }, [])
+    }, [selectedProduct])
 
     return (
         <>

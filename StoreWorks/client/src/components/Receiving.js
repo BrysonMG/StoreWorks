@@ -41,9 +41,10 @@ export const Receiving = () => {
                     ReceivedQuantity: quantity,
                     ReceivedTotal: (quantity * costPer)
                 }
-                addReceived(receivedObj);
-                increaseProductQuantity();
-                clearForm();
+                addReceived(receivedObj).then(() => {
+                    increaseProductQuantity();
+                    clearForm();
+                })
             })
     }
 
@@ -57,8 +58,9 @@ export const Receiving = () => {
     const increaseProductQuantity = () => {
         const newQuantityProduct = { ...selectedProduct }
         newQuantityProduct.quantity += parseInt(quantity);
-        editProduct(newQuantityProduct);
-        getProducts();
+        editProduct(newQuantityProduct).then(() => {
+            getProducts();
+        })
     }
 
     useEffect(() => {
@@ -70,7 +72,7 @@ export const Receiving = () => {
 
     useEffect(() => {
         getProducts();
-    }, [])
+    }, [selectedProduct])
 
     return (
         <>

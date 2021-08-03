@@ -41,9 +41,10 @@ export const Sales = () => {
                     SaleQuantity: quantity,
                     SaleTotal: (quantity * pricePer)
                 }
-                addSale(saleObj);
-                reduceProductQuantity()
-                clearForm();
+                addSale(saleObj).then(() => {
+                    reduceProductQuantity()
+                    clearForm();
+                })
             })
     }
 
@@ -51,14 +52,15 @@ export const Sales = () => {
         setSelectedProduct({ productName: "", quantity: 0, sellPrice: 0.00 });
         setPricePer("");
         setQuantity("");
-        setSearch("")
+        setSearch("");
     }
 
     const reduceProductQuantity = () => {
         const newQuantityProduct = { ...selectedProduct }
         newQuantityProduct.quantity -= parseInt(quantity);
-        editProduct(newQuantityProduct)
-        getProducts();
+        editProduct(newQuantityProduct).then(() => {
+            getProducts();
+        })
     }
 
     useEffect(() => {
@@ -70,7 +72,7 @@ export const Sales = () => {
 
     useEffect(() => {
         getProducts();
-    }, [])
+    }, [selectedProduct])
 
     return (
         <>
