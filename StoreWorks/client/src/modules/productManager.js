@@ -36,15 +36,27 @@ export const addProduct = product => {
 }
 
 export const editProduct = (product) => {
-    return getToken().then(token =>
-        fetch(`${apiUrl}/${product.Id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify(product)
-        }));
+    return getToken().then(token => {
+        if (product.Id === undefined) {
+            fetch(`${apiUrl}/${product.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(product)
+            })
+        } else {
+            fetch(`${apiUrl}/${product.Id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(product)
+            })
+        }
+    });
 }
 
 export const deleteProduct = (id) => {

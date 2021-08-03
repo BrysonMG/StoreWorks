@@ -30,9 +30,10 @@ export const EditEmployeeForm = () => {
             CanManage: canManage
         }
         console.log(employeeObj);
-        editEmployee(employeeObj);
-        alert("Employee Successfully Updated");
-        history.push("/EmployeeMgmt");
+        editEmployee(employeeObj).then(() => {
+            alert("Employee Successfully Updated");
+            history.push("/EmployeeMgmt");
+        })
     }
 
     useEffect(() => {

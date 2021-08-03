@@ -63,7 +63,12 @@ export const EditProductForm = () => {
     }
 
     const handleSubmit = event => {
-        event.preventDefault()
+        event.preventDefault();
+        if (isNaN(cost) || isNaN(sellPrice)) {
+            alert("Invalid Data Entered. Changes Not Saved");
+            history.push("/ProductMgmt");
+            return;
+        }
         const productObj = {
             Id: parseInt(productId),
             CategoryId: selectedCategory.id,
@@ -73,9 +78,10 @@ export const EditProductForm = () => {
             SellPrice: parseFloat(sellPrice).toFixed(2)
         }
         clearForm();
-        editProduct(productObj);
-        alert("Product Successfully Updated!");
-        history.push("/ProductMgmt");
+        editProduct(productObj).then(() => {
+            alert("Product Successfully Updated!");
+            history.push("/ProductMgmt");
+        })
     }
 
     const clearForm = () => {

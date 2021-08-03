@@ -48,6 +48,10 @@ export const AddProductForm = () => {
 
     const handleSubmit = event => {
         event.preventDefault()
+        if (selectedCategory.id === 0) {
+            alert("Please Select A Category.");
+            return;
+        }
         const productObj = {
             CategoryId: selectedCategory.id,
             ProductName: productName,

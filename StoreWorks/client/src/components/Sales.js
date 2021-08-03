@@ -57,7 +57,7 @@ export const Sales = () => {
     const reduceProductQuantity = () => {
         const newQuantityProduct = { ...selectedProduct }
         newQuantityProduct.quantity -= parseInt(quantity);
-        editProduct(newQuantityProduct);
+        editProduct(newQuantityProduct)
         getProducts();
     }
 

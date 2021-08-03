@@ -48,9 +48,6 @@ export const ApplicationViews = ({ isLoggedIn }) => {
                         }
                     }}
                 </Route>
-                {/* <Route exact path="/Summary">
-                    {userCanManage ? <Summary /> : <Redirect to="/" />}
-                </Route> */}
                 <Route exact path="/Register">
                     {isLoggedIn ? <Redirect to="/" /> : <Register />}
                 </Route>
