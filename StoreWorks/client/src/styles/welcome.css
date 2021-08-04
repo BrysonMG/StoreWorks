@@ -1,0 +1,10 @@
+.welcomeContainer {
+    background-color: rgb(170, 255, 170);
+    border-radius: 20px;
+    padding: 15px;
+    margin: 2em;
+}
+
+.welcomeContainer h3, .welcomeContainer h4 {
+    text-align: center;
+}

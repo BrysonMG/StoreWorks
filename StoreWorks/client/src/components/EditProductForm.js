@@ -22,8 +22,8 @@ export const EditProductForm = () => {
                 .then(category => {
                     setSelectedCategory(category);
                 });
-            setCost(theProduct.cost);
-            setSellPrice(theProduct.sellPrice)
+            setCost(theProduct.cost.toFixed(2));
+            setSellPrice(theProduct.sellPrice.toFixed(2))
         })
     }
 
@@ -100,10 +100,10 @@ export const EditProductForm = () => {
         <div className="editProductForm">
             <h3>Edit A Product</h3>
 
-            <label>Product Name</label>
+            <label>Product Name: </label>
             <input onChange={handleName} value={name} />
             <br />
-            <label>Category</label>
+            <label>Category: </label>
             <select onChange={handleCategory}>
                 <option selected hidden disabled>Please Choose A Category</option>
                 {categories.map(category => {
@@ -111,13 +111,13 @@ export const EditProductForm = () => {
                 })}
             </select>
             <br />
-            <label>Cost</label>
+            <label>Cost: </label>
             <input onChange={handleCost} placeholder="0.00" value={cost} />
             <br />
-            <label>Selling Price</label>
+            <label>Selling Price: </label>
             <input onChange={handleSell} placeholder="0.00" value={sellPrice} />
             <br /><br />
-            <button onClick={handleSubmit}>Save Changes</button>
+            <button className="regBtn" onClick={handleSubmit}>Save Changes</button>
             <button onClick={() => { history.push("/ProductMgmt") }}>Exit</button>
         </div>
     )

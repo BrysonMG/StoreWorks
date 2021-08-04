@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getAllEmployees } from '../modules/employeeManager';
 import { EmployeeCard } from './EmployeeCard';
-import '../styles/tables.css'
+import '../styles/tables.css';
+import '../styles/employeeManage.css';
 
 export const EmployeeMgmt = () => {
     const [employees, setEmployees] = useState([]);
@@ -17,10 +18,10 @@ export const EmployeeMgmt = () => {
     }, [])
 
     return (
-        <>
+        <div className="employeeMgmt">
             <table className="employeeList">
                 <thead>
-                    <tr className="tableHeader">
+                    <tr className="tableSubLabel">
                         <th>Name</th>
                         <th>Email</th>
                         <th>Manager Access</th>
@@ -33,6 +34,6 @@ export const EmployeeMgmt = () => {
                     })}
                 </tbody>
             </table>
-        </>
+        </div>
     )
 }

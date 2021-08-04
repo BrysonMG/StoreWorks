@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { getAllEmployees, editEmployee } from "../modules/employeeManager";
 import { FormGroup } from "reactstrap";
+import '../styles/employeeManage.css';
 
 export const EditEmployeeForm = () => {
     const [theEmployee, setTheEmployee] = useState({})
@@ -29,7 +30,6 @@ export const EditEmployeeForm = () => {
             Email: theEmployee.email,
             CanManage: canManage
         }
-        console.log(employeeObj);
         editEmployee(employeeObj).then(() => {
             alert("Employee Successfully Updated");
             history.push("/EmployeeMgmt");
@@ -41,17 +41,18 @@ export const EditEmployeeForm = () => {
     }, [])
 
     return (
-        <fieldset>
+        <fieldset className="editEmployeeForm">
+            <h3>Edit an Employee</h3>
             <FormGroup>
                 <label>Name: </label>
-                <input value={name} onChange={ev => setName(ev.target.value)} />
+                <input id="empEditName" value={name} onChange={ev => setName(ev.target.value)} />
             </FormGroup>
             <FormGroup>
                 <label>Manager Access: </label>
                 <input type="checkbox" checked={canManage} onChange={() => { setCanManage(!canManage) }} />
             </FormGroup>
             <FormGroup>
-                <button onClick={submitChanges}>Save Changes</button>
+                <button className="regBtn" onClick={submitChanges}>Save Changes</button>
                 <button onClick={() => { history.push("/EmployeeMgmt") }}>Exit</button>
             </FormGroup>
         </fieldset>

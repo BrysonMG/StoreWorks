@@ -3,6 +3,7 @@ import { getAllProducts, editProduct } from "../modules/productManager";
 import firebase from "firebase";
 import { getEmployeeByEmail } from "../modules/employeeManager";
 import { addShrink } from "../modules/shrinkManager";
+import '../styles/saleRecShrink.css';
 
 export const Shrinkage = () => {
     const [show, setShow] = useState(false);
@@ -41,9 +42,10 @@ export const Shrinkage = () => {
                     ShrinkQuantity: quantity,
                     ShrinkTotal: (quantity * costPer)
                 }
-                addShrink(shrinkObj);
-                reduceProductQuantity();
-                clearForm();
+                addShrink(shrinkObj).then(() => {
+                    reduceProductQuantity();
+                    clearForm();
+                })
             })
     }
 
@@ -57,8 +59,9 @@ export const Shrinkage = () => {
     const reduceProductQuantity = () => {
         const newQuantityProduct = { ...selectedProduct }
         newQuantityProduct.quantity -= parseInt(quantity);
-        editProduct(newQuantityProduct);
-        getProducts();
+        editProduct(newQuantityProduct).then(() => {
+            getProducts();
+        })
     }
 
     useEffect(() => {
@@ -70,17 +73,18 @@ export const Shrinkage = () => {
 
     useEffect(() => {
         getProducts();
-    }, [])
+    }, [selectedProduct])
 
     return (
-        <>
+        <div className="formContainer">
             <h3>Shrinkage is for logging damaged, lost, or stolen products.</h3>
-            <div ref={wrapperRef}>
+            <div className="productSelect">
                 <label>Select a Product: </label>
                 <input
                     id="saleProductInput"
                     onFocus={() => setShow(!show)}
                     onChange={event => {
+                        setShow(true)
                         setSearch(event.target.value);
                     }}
                     className="autoProduct"
@@ -88,26 +92,28 @@ export const Shrinkage = () => {
                     value={search}
                 />
                 {show && (
-                    <div className="autoList">
-                        {products
-                            .slice(1, products.length)
-                            .filter(({ productName }) => productName.toLowerCase().indexOf(search.toLowerCase()) > -1)
-                            .map((product, i) => {
-                                return (
-                                    <div
-                                        onClick={() => {
-                                            setSelectedProduct(product);
-                                            setCostPer(product.cost);
-                                            updateProductSearch(product.productName);
-                                        }}
-                                        className="autoOption"
-                                        key={i}
-                                        tabIndex="0"
-                                    >
-                                        <span>{product.productName}</span>
-                                    </div>
-                                )
-                            })}
+                    <div ref={wrapperRef} className="listOuterBox">
+                        <div className="autoList">
+                            {products
+                                .slice(1, products.length)
+                                .filter(({ productName }) => productName.toLowerCase().indexOf(search.toLowerCase()) > -1)
+                                .map((product, i) => {
+                                    return (
+                                        <div
+                                            onClick={() => {
+                                                setSelectedProduct(product);
+                                                setCostPer(product.cost.toFixed(2));
+                                                updateProductSearch(product.productName);
+                                            }}
+                                            className="autoOption"
+                                            key={i}
+                                            tabIndex="0"
+                                        >
+                                            <span>{product.productName}</span>
+                                        </div>
+                                    )
+                                })}
+                        </div>
                     </div>
                 )}
             </div>
@@ -131,7 +137,7 @@ export const Shrinkage = () => {
                 <span className="noModify">${(quantity * costPer)?.toFixed(2)}</span>
             </div>
             <div className="submitClear">
-                <button onClick={() => {
+                <button className="regBtn" onClick={() => {
                     addShrinkToDb()
                     alert("Shrink Logged Successfully!")
                 }}>Confirm Shrink</button>
@@ -139,6 +145,6 @@ export const Shrinkage = () => {
                     clearForm()
                 }}>Clear</button>
             </div>
-        </>
+        </div>
     )
 }

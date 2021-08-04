@@ -3,6 +3,7 @@ import { getAllProducts, editProduct } from "../modules/productManager";
 import firebase from "firebase";
 import { getEmployeeByEmail } from "../modules/employeeManager";
 import { addSale } from "../modules/saleManager";
+import '../styles/saleRecShrink.css';
 
 export const Sales = () => {
     const [show, setShow] = useState(false);
@@ -41,9 +42,10 @@ export const Sales = () => {
                     SaleQuantity: quantity,
                     SaleTotal: (quantity * pricePer)
                 }
-                addSale(saleObj);
-                reduceProductQuantity()
-                clearForm();
+                addSale(saleObj).then(() => {
+                    reduceProductQuantity()
+                    clearForm();
+                })
             })
     }
 
@@ -51,14 +53,15 @@ export const Sales = () => {
         setSelectedProduct({ productName: "", quantity: 0, sellPrice: 0.00 });
         setPricePer("");
         setQuantity("");
-        setSearch("")
+        setSearch("");
     }
 
     const reduceProductQuantity = () => {
         const newQuantityProduct = { ...selectedProduct }
         newQuantityProduct.quantity -= parseInt(quantity);
-        editProduct(newQuantityProduct)
-        getProducts();
+        editProduct(newQuantityProduct).then(() => {
+            getProducts();
+        })
     }
 
     useEffect(() => {
@@ -70,17 +73,18 @@ export const Sales = () => {
 
     useEffect(() => {
         getProducts();
-    }, [])
+    }, [selectedProduct])
 
     return (
-        <>
+        <div className="formContainer">
             <h3>Sales is for logging in products that have been sold.</h3>
-            <div ref={wrapperRef}>
+            <div className="productSelect">
                 <label>Select a Product: </label>
                 <input
                     id="saleProductInput"
                     onFocus={() => setShow(!show)}
                     onChange={event => {
+                        setShow(true);
                         setSearch(event.target.value);
                     }}
                     className="autoProduct"
@@ -88,26 +92,28 @@ export const Sales = () => {
                     value={search}
                 />
                 {show && (
-                    <div className="autoList">
-                        {products
-                            .slice(1, products.length)
-                            .filter(({ productName }) => productName.toLowerCase().indexOf(search.toLowerCase()) > -1)
-                            .map((product, i) => {
-                                return (
-                                    <div
-                                        onClick={() => {
-                                            setSelectedProduct(product);
-                                            setPricePer(product.sellPrice);
-                                            updateProductSearch(product.productName);
-                                        }}
-                                        className="autoOption"
-                                        key={i}
-                                        tabIndex="0"
-                                    >
-                                        <span>{product.productName}</span>
-                                    </div>
-                                )
-                            })}
+                    <div ref={wrapperRef} className="listOuterBox">
+                        <div className="autoList">
+                            {products
+                                .slice(1, products.length)
+                                .filter(({ productName }) => productName.toLowerCase().indexOf(search.toLowerCase()) > -1)
+                                .map((product, i) => {
+                                    return (
+                                        <div
+                                            onClick={() => {
+                                                setSelectedProduct(product);
+                                                setPricePer(product.sellPrice.toFixed(2));
+                                                updateProductSearch(product.productName);
+                                            }}
+                                            className="autoOption"
+                                            key={i}
+                                            tabIndex="0"
+                                        >
+                                            <span>{product.productName}</span>
+                                        </div>
+                                    )
+                                })}
+                        </div>
                     </div>
                 )}
             </div>
@@ -131,7 +137,7 @@ export const Sales = () => {
                 <span className="noModify">${(quantity * pricePer)?.toFixed(2)}</span>
             </div>
             <div className="submitClear">
-                <button onClick={() => {
+                <button className="regBtn" onClick={() => {
                     addSaleToDb()
                     alert("Sale Logged Successfully!")
                 }}>Confirm Sale</button>
@@ -139,6 +145,6 @@ export const Sales = () => {
                     clearForm()
                 }}>Clear</button>
             </div>
-        </>
+        </div>
     )
 }

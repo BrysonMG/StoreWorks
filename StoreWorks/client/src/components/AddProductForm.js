@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { addProduct } from '../modules/productManager';
 import { getAllCategories } from '../modules/categoryManager';
+import '../styles/productManage.css';
 
 export const AddProductForm = () => {
     const [productName, setProductName] = useState("");
@@ -79,10 +80,10 @@ export const AddProductForm = () => {
         <div className="addProductForm">
             <h3>Add A Product</h3>
 
-            <label>Product Name</label>
+            <label>Product Name: </label>
             <input onChange={handleName} value={productName} />
             <br />
-            <label>Category</label>
+            <label>Category: </label>
             <select onChange={handleCategory}>
                 <option selected hidden disabled>Please Choose A Category</option>
                 {categories.map(category => {
@@ -90,13 +91,13 @@ export const AddProductForm = () => {
                 })}
             </select>
             <br />
-            <label>Cost</label>
+            <label>Cost: </label>
             <input onChange={handleCost} placeholder="0.00" value={cost} />
             <br />
-            <label>Selling Price</label>
+            <label>Selling Price: </label>
             <input onChange={handleSell} placeholder="0.00" value={sellPrice} />
             <br /><br />
-            <button onClick={handleSubmit}>Add Product</button>
+            <button className="regBtn" onClick={handleSubmit}>Add Product</button>
             <button onClick={() => { history.push("/ProductMgmt") }}>Exit</button>
         </div>
     )

@@ -1,0 +1,50 @@
+.loginLabel {
+    font-size: x-large;
+    display: block;
+}
+
+#loginButton, button:hover {
+    background-color: rgb(1, 112, 66);
+}
+
+#loginButton:hover, button {
+    background-color: rgb(2, 83, 49);
+}
+
+.regBtn {
+    margin-right: 1em;
+}
+
+form {
+    width: fit-content;
+    background-color: rgb(170, 255, 170);
+    border-radius: 20px;
+    padding: 15px;
+    margin: 2em;
+}
+
+.formGroup {
+    margin-bottom: .5em;
+}
+
+fieldset {
+    border: none;
+    margin-left: .5em;
+}
+
+#email, #password, .loginInput {
+    width: 15em;
+}
+
+.registerPage {
+    background-color: rgb(170, 255, 170);
+    border-radius: 20px;
+    padding: 15px;
+    margin: 2em;
+    width: fit-content;
+}
+
+.registerPage h2 {
+    margin: auto;
+    margin-top: 0;
+}

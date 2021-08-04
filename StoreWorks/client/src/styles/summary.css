@@ -1,4 +1,12 @@
 .summaryContainer {
     display: flex;
-    justify-content: space-evenly;
+    justify-content:space-between;
+    flex-wrap: wrap;
+    margin: auto;
+    margin-top: 2em;
+    width:75%;
+}
+
+.scrollBox {
+    margin-bottom: 2em;
 }

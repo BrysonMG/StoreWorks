@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { register } from "../modules/authManager";
 import { FormGroup } from "reactstrap";
+import '../styles/login.css'
 
 export const Register = () => {
     const [name, setName] = useState("");
@@ -38,27 +39,29 @@ export const Register = () => {
     }
 
     return (
-        <div>
-            <h2>Register New Employee</h2>
+        <div className="registerPage">
+            <h2 id="noMarginTop">Register New Employee</h2>
             <fieldset>
-                <FormGroup>
-                    <label>First and Last Name: </label>
-                    <input onChange={ev => setName(ev.target.value)} />
+                <FormGroup className="formGroup">
+                    <label className="loginLabel">First and Last Name: </label>
+                    <input className="loginInput" onChange={ev => setName(ev.target.value)} />
                 </FormGroup>
-                <FormGroup>
-                    <label>Email Address: </label>
-                    <input onChange={ev => setEmail(ev.target.value)} />
+                <FormGroup className="formGroup">
+                    <label className="loginLabel">Email Address: </label>
+                    <input className="loginInput" onChange={ev => setEmail(ev.target.value)} />
                 </FormGroup>
-                <FormGroup>
-                    <label>Password: </label>
-                    <input onChange={ev => setPassword(ev.target.value)} />
+                <FormGroup className="formGroup">
+                    <label className="loginLabel">Password: </label>
+                    <input type="password" className="loginInput" onChange={ev => setPassword(ev.target.value)} />
                 </FormGroup >
-                <FormGroup>
-                    <label>Confirm Password: </label>
-                    <input onChange={ev => setConfirmPw(ev.target.value)} />
+                <FormGroup className="formGroup">
+                    <label className="loginLabel">Confirm Password: </label>
+                    <input type="password" className="loginInput" onChange={ev => setConfirmPw(ev.target.value)} />
                 </FormGroup >
-                <button onClick={registerSubmit}>Register</button>
-                <button onClick={() => { history.push("/Login") }}>Back To Login</button>
+                <div className="regButtonBox">
+                    <button className="regBtn" onClick={registerSubmit}>Register</button>
+                    <button onClick={() => { history.push("/Login") }}>Back To Login</button>
+                </div>
             </fieldset >
         </div >
     )

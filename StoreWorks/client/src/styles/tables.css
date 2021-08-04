@@ -3,10 +3,40 @@ table, tr, th, td {
     border-collapse: collapse;
 }
 
-.tableHeader {
-    background-color: rgb(151, 151, 151);
+td {
+    padding: 3px;
 }
 
-.tableRow {
+table {
+    height: min-content;
+    border: 5px solid black;
+}
+
+.scrollBox {
+    max-height: 300px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(2, 156, 92) white;
+}
+
+th {
+    height: 50px;
+}
+
+.tableData {
+    max-width: 250px;
+}
+
+tbody tr {
     background-color: rgb(219, 219, 219);
+}
+
+.tableLabel {
+    background-color: rgb(1, 112, 66);
+    color: white;
+    min-width: 215px;
+}
+
+.tableSubLabel {
+    background-color: rgb(51, 187, 51);
 }
