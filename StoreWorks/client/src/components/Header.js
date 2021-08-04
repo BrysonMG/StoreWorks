@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavMenu } from './NavMenu';
+import '../styles/header.css';
 
 export const Header = ({ isLoggedIn }) => {
 

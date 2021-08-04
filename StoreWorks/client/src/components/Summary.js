@@ -7,6 +7,7 @@ import { SoldCard } from './SoldCard';
 import { ReceivedCard } from './ReceivedCard';
 import { ShrinkCard } from './ShrinkCard';
 import '../styles/summary.css';
+import '../styles/tables.css';
 
 
 export const Summary = () => {
@@ -85,95 +86,105 @@ export const Summary = () => {
 
     return (
         <div className="summaryContainer">
-            <table>
-                <thead>
-                    <tr>
-                        <th colSpan='3'>Products Received</th>
-                    </tr>
-                    <tr>
-                        <th colSpan='3'>Total Cost: ${getTotalReceivedCost()}</th>
-                    </tr>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Cost</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {received.map(rec => {
-                        return <ReceivedCard key={rec.id} received={rec} />
-                    })}
-                </tbody>
-            </table>
+            <div className="scrollBox">
+                <table>
+                    <thead>
+                        <tr>
+                            <th className="tableLabel" colSpan='3'>Products Received</th>
+                        </tr>
+                        <tr>
+                            <th className="tableLabel" colSpan='3'>Total Cost: ${getTotalReceivedCost()}</th>
+                        </tr>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {received.map(rec => {
+                            return <ReceivedCard key={rec.id} received={rec} />
+                        })}
+                    </tbody>
+                </table>
+            </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th colSpan='3'>Products Sold</th>
-                    </tr>
-                    <tr>
-                        <th colSpan='3'>Total Income: ${getTotalSalesIncome()}</th>
-                    </tr>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Sold For</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {sales.map(sale => {
-                        return <SoldCard key={sale.id} sale={sale} />
-                    })}
-                </tbody>
-            </table>
+            <div className="scrollBox">
+                <table>
+                    <thead>
+                        <tr>
+                            <th className="tableLabel" colSpan='3'>Products Sold</th>
+                        </tr>
+                        <tr>
+                            <th className="tableLabel" colSpan='3'>Total Income: ${getTotalSalesIncome()}</th>
+                        </tr>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Sold For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {sales.map(sale => {
+                            return <SoldCard key={sale.id} sale={sale} />
+                        })}
+                    </tbody>
+                </table>
+            </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th colSpan='3'>Shrinkage</th>
-                    </tr>
-                    <tr>
-                        <th colSpan='3'>Total Loss: ${getTotalShrinkLoss()}</th>
-                    </tr>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Cost</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {shrink.map(shr => {
-                        return <ShrinkCard key={shr.id} shrink={shr} />
-                    })}
-                </tbody>
-            </table>
+            <div className="scrollBox">
+                <table>
+                    <thead>
+                        <tr>
+                            <th className="tableLabel" colSpan='3'>Shrinkage</th>
+                        </tr>
+                        <tr>
+                            <th className="tableLabel" colSpan='3'>Total Loss: ${getTotalShrinkLoss()}</th>
+                        </tr>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {shrink.map(shr => {
+                            return <ShrinkCard key={shr.id} shrink={shr} />
+                        })}
+                    </tbody>
+                </table>
+            </div>
 
             <div className="smallTables">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Net Profit / Loss</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>$ {getNetGainOrLoss()}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div className="scrollBox">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className="tableLabel">Net Profit / Loss</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$ {getNetGainOrLoss()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Current Inventory Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>$ {getOnHandValue()}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div className="scrollBox">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className="tableLabel">Current Inventory Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$ {getOnHandValue()}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     )

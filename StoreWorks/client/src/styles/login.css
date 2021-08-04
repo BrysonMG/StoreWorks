@@ -1,0 +1,35 @@
+.loginLabel {
+    font-size: x-large;
+}
+
+#loginButton, button:hover {
+    background-color: rgb(1, 112, 66);
+}
+
+#loginButton:hover, button {
+    background-color: rgb(2, 83, 49);
+}
+
+button {
+    margin-right: 1em;
+}
+
+form {
+    margin-left: 1em;
+}
+
+.formGroup {
+    margin-bottom: .5em;
+}
+
+fieldset {
+    border: none;
+}
+
+#email, #password, .loginInput {
+    width: 15em;
+}
+
+.registerPage {
+    margin-left: 2em;
+}

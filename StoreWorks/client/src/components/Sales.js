@@ -3,6 +3,7 @@ import { getAllProducts, editProduct } from "../modules/productManager";
 import firebase from "firebase";
 import { getEmployeeByEmail } from "../modules/employeeManager";
 import { addSale } from "../modules/saleManager";
+import '../styles/saleRecShrink.css';
 
 export const Sales = () => {
     const [show, setShow] = useState(false);
@@ -75,14 +76,15 @@ export const Sales = () => {
     }, [selectedProduct])
 
     return (
-        <>
+        <div className="formContainer">
             <h3>Sales is for logging in products that have been sold.</h3>
-            <div ref={wrapperRef}>
+            <div className="productSelect">
                 <label>Select a Product: </label>
                 <input
                     id="saleProductInput"
                     onFocus={() => setShow(!show)}
                     onChange={event => {
+                        setShow(true);
                         setSearch(event.target.value);
                     }}
                     className="autoProduct"
@@ -90,26 +92,28 @@ export const Sales = () => {
                     value={search}
                 />
                 {show && (
-                    <div className="autoList">
-                        {products
-                            .slice(1, products.length)
-                            .filter(({ productName }) => productName.toLowerCase().indexOf(search.toLowerCase()) > -1)
-                            .map((product, i) => {
-                                return (
-                                    <div
-                                        onClick={() => {
-                                            setSelectedProduct(product);
-                                            setPricePer(product.sellPrice);
-                                            updateProductSearch(product.productName);
-                                        }}
-                                        className="autoOption"
-                                        key={i}
-                                        tabIndex="0"
-                                    >
-                                        <span>{product.productName}</span>
-                                    </div>
-                                )
-                            })}
+                    <div ref={wrapperRef} className="listOuterBox">
+                        <div className="autoList">
+                            {products
+                                .slice(1, products.length)
+                                .filter(({ productName }) => productName.toLowerCase().indexOf(search.toLowerCase()) > -1)
+                                .map((product, i) => {
+                                    return (
+                                        <div
+                                            onClick={() => {
+                                                setSelectedProduct(product);
+                                                setPricePer(product.sellPrice);
+                                                updateProductSearch(product.productName);
+                                            }}
+                                            className="autoOption"
+                                            key={i}
+                                            tabIndex="0"
+                                        >
+                                            <span>{product.productName}</span>
+                                        </div>
+                                    )
+                                })}
+                        </div>
                     </div>
                 )}
             </div>
@@ -141,6 +145,6 @@ export const Sales = () => {
                     clearForm()
                 }}>Clear</button>
             </div>
-        </>
+        </div>
     )
 }
