@@ -102,7 +102,7 @@ export const Sales = () => {
                                         <div
                                             onClick={() => {
                                                 setSelectedProduct(product);
-                                                setPricePer(product.sellPrice);
+                                                setPricePer(product.sellPrice.toFixed(2));
                                                 updateProductSearch(product.productName);
                                             }}
                                             className="autoOption"
@@ -137,7 +137,7 @@ export const Sales = () => {
                 <span className="noModify">${(quantity * pricePer)?.toFixed(2)}</span>
             </div>
             <div className="submitClear">
-                <button onClick={() => {
+                <button className="regBtn" onClick={() => {
                     addSaleToDb()
                     alert("Sale Logged Successfully!")
                 }}>Confirm Sale</button>

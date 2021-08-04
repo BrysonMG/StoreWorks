@@ -26,7 +26,12 @@ export const EmployeeCard = ({ employee, getEmployees }) => {
                 <td>{employee.employeeName}</td>
                 <td>{employee.email}</td>
                 <td>{employee.canManage ? "Yes" : "No"}</td>
-                <td className="tableButtons"><button onClick={() => { history.push(`/EditEmployee/${employee.id}`) }}>Edit</button><button onClick={() => { deleteThisEmployee(employee) }}>Delete</button></td>
+                <td className="tableButtons">
+                    <div className="tableBtnBox">
+                        <button onClick={() => { history.push(`/EditEmployee/${employee.id}`) }}>Edit</button>
+                        <button onClick={() => { deleteThisEmployee(employee) }}>Delete</button>
+                    </div>
+                </td>
             </tr>
         )
     }

@@ -3,8 +3,13 @@ table, tr, th, td {
     border-collapse: collapse;
 }
 
+td {
+    padding: 3px;
+}
+
 table {
     height: min-content;
+    border: 5px solid black;
 }
 
 .scrollBox {
@@ -22,11 +27,7 @@ th {
     max-width: 250px;
 }
 
-.tableHeader {
-    background-color: rgb(151, 151, 151);
-}
-
-.tableRow {
+tbody tr {
     background-color: rgb(219, 219, 219);
 }
 
@@ -34,4 +35,8 @@ th {
     background-color: rgb(1, 112, 66);
     color: white;
     min-width: 215px;
+}
+
+.tableSubLabel {
+    background-color: rgb(51, 187, 51);
 }

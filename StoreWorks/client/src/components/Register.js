@@ -40,7 +40,7 @@ export const Register = () => {
 
     return (
         <div className="registerPage">
-            <h2>Register New Employee</h2>
+            <h2 id="noMarginTop">Register New Employee</h2>
             <fieldset>
                 <FormGroup className="formGroup">
                     <label className="loginLabel">First and Last Name: </label>
@@ -59,7 +59,7 @@ export const Register = () => {
                     <input type="password" className="loginInput" onChange={ev => setConfirmPw(ev.target.value)} />
                 </FormGroup >
                 <div className="regButtonBox">
-                    <button onClick={registerSubmit}>Register</button>
+                    <button className="regBtn" onClick={registerSubmit}>Register</button>
                     <button onClick={() => { history.push("/Login") }}>Back To Login</button>
                 </div>
             </fieldset >

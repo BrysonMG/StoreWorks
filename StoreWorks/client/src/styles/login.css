@@ -1,5 +1,6 @@
 .loginLabel {
     font-size: x-large;
+    display: block;
 }
 
 #loginButton, button:hover {
@@ -10,12 +11,16 @@
     background-color: rgb(2, 83, 49);
 }
 
-button {
+.regBtn {
     margin-right: 1em;
 }
 
 form {
-    margin-left: 1em;
+    width: fit-content;
+    background-color: rgb(170, 255, 170);
+    border-radius: 20px;
+    padding: 15px;
+    margin: 2em;
 }
 
 .formGroup {
@@ -24,6 +29,7 @@ form {
 
 fieldset {
     border: none;
+    margin-left: .5em;
 }
 
 #email, #password, .loginInput {
@@ -31,5 +37,14 @@ fieldset {
 }
 
 .registerPage {
-    margin-left: 2em;
+    background-color: rgb(170, 255, 170);
+    border-radius: 20px;
+    padding: 15px;
+    margin: 2em;
+    width: fit-content;
+}
+
+.registerPage h2 {
+    margin: auto;
+    margin-top: 0;
 }

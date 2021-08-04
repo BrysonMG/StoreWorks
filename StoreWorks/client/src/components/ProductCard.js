@@ -21,7 +21,12 @@ export const ProductCard = ({ product, getProducts }) => {
             <td className="productData">{product.cost.toFixed(2)}</td>
             <td className="productData">{product.sellPrice.toFixed(2)}</td>
             <td className="productData">{(product.sellPrice - product.cost).toFixed(2)}</td>
-            <td className="tableButtons"><button onClick={() => { history.push(`/EditProduct/${product.id}`) }}>Edit</button> <button onClick={() => { deleteThisProduct(product) }}>Delete</button></td>
+            <td className="tableButtons">
+                <div className="tableBtnBox">
+                    <button onClick={() => { history.push(`/EditProduct/${product.id}`) }}>Edit</button>
+                    <button onClick={() => { deleteThisProduct(product) }}>Delete</button>
+                </div>
+            </td>
         </tr >
     )
 }

@@ -102,7 +102,7 @@ export const Shrinkage = () => {
                                         <div
                                             onClick={() => {
                                                 setSelectedProduct(product);
-                                                setCostPer(product.cost);
+                                                setCostPer(product.cost.toFixed(2));
                                                 updateProductSearch(product.productName);
                                             }}
                                             className="autoOption"
@@ -137,7 +137,7 @@ export const Shrinkage = () => {
                 <span className="noModify">${(quantity * costPer)?.toFixed(2)}</span>
             </div>
             <div className="submitClear">
-                <button onClick={() => {
+                <button className="regBtn" onClick={() => {
                     addShrinkToDb()
                     alert("Shrink Logged Successfully!")
                 }}>Confirm Shrink</button>

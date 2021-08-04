@@ -95,7 +95,7 @@ export const Summary = () => {
                         <tr>
                             <th className="tableLabel" colSpan='3'>Total Cost: ${getTotalReceivedCost()}</th>
                         </tr>
-                        <tr>
+                        <tr className="tableSubLabel">
                             <th>Product</th>
                             <th>Quantity</th>
                             <th>Cost</th>
@@ -118,7 +118,7 @@ export const Summary = () => {
                         <tr>
                             <th className="tableLabel" colSpan='3'>Total Income: ${getTotalSalesIncome()}</th>
                         </tr>
-                        <tr>
+                        <tr className="tableSubLabel">
                             <th>Product</th>
                             <th>Quantity</th>
                             <th>Sold For</th>
@@ -141,7 +141,7 @@ export const Summary = () => {
                         <tr>
                             <th className="tableLabel" colSpan='3'>Total Loss: ${getTotalShrinkLoss()}</th>
                         </tr>
-                        <tr>
+                        <tr className="tableSubLabel">
                             <th>Product</th>
                             <th>Quantity</th>
                             <th>Cost</th>
@@ -160,7 +160,7 @@ export const Summary = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th className="tableLabel">Net Profit / Loss</th>
+                                <th className="tableLabel">Net Profit(+) / Loss(-)</th>
                             </tr>
                         </thead>
                         <tbody>

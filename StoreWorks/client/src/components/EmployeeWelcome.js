@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/welcome.css';
 
 export const EmployeeWelcome = () => {
     return (

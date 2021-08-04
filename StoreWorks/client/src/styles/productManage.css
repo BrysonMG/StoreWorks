@@ -1,0 +1,43 @@
+.mgmtPage {
+    width: fit-content;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 3em;
+}
+
+.sizingBox {
+    max-height: 500px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(2, 156, 92) white;
+}
+
+#addProdBtn {
+    margin-bottom: 1em;
+}
+
+.tableBtnBox {
+    width: 150px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.addProductForm, .editProductForm {
+    margin: 2em;
+    display: inline-block;
+    border-radius: 20px;
+    padding: 15px;
+    background-color: rgb(170, 255, 170);
+}
+
+.addProductForm h3, .editProductForm h3 {
+    margin-top: 0;
+}
+
+.addProductForm h3, .addProductForm label, .editProductForm h3, .editProductForm label {
+    font-size: x-large;
+}
+
+.addProductForm input, .editProductForm input {
+    width: 15em;
+}

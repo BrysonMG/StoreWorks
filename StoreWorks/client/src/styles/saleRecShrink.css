@@ -1,5 +1,13 @@
 .formContainer {
     margin: 2em;
+    border-radius: 20px;
+    background-color: rgb(170, 255, 170);
+    padding: 15px;
+    width: fit-content;
+}
+
+.quantityBox span {
+    white-space: nowrap;
 }
 
 .autoList {
@@ -24,6 +32,10 @@
     font-size: x-large;
 }
 
+.formContainer h3 {
+    margin-top: 0;
+}
+
 .formContainer input {
     width: 15em;
 }
@@ -34,5 +46,8 @@
     max-height: fit-content;
     max-width: fit-content;
     background-color: lightgreen;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    border: 2px solid black;
 }
 
