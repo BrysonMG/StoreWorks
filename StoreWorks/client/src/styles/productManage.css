@@ -3,17 +3,19 @@
     margin: auto;
     margin-top: 2em;
     margin-bottom: 3em;
+    background-color: rgb(170, 255, 170);
+    padding: .5em;
 }
 
 .sizingBox {
     max-height: 500px;
     overflow-y: scroll;
     scrollbar-width: thin;
-    scrollbar-color: rgb(2, 156, 92) white;
+    scrollbar-color: rgb(2, 156, 92) rgb(170, 255, 170);
 }
 
 #addProdBtn {
-    margin-bottom: 1em;
+    margin: .5em;
 }
 
 .tableBtnBox {
