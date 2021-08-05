@@ -60,7 +60,7 @@ export const Register = () => {
                 </FormGroup >
                 <div className="regButtonBox">
                     <button className="regBtn" onClick={registerSubmit}>Register</button>
-                    <button onClick={() => { history.push("/Login") }}>Back To Login</button>
+                    <button className="regBtn" onClick={() => { history.push("/Login") }}>Back To Login</button>
                 </div>
             </fieldset >
         </div >
