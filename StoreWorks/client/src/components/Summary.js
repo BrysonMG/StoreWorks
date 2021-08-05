@@ -6,6 +6,7 @@ import { getAllProducts } from '../modules/productManager';
 import { SoldCard } from './SoldCard';
 import { ReceivedCard } from './ReceivedCard';
 import { ShrinkCard } from './ShrinkCard';
+import Draggable from 'react-draggable';
 import '../styles/summary.css';
 import '../styles/tables.css';
 
@@ -15,6 +16,16 @@ export const Summary = () => {
     const [received, setReceived] = useState([]);
     const [shrink, setShrink] = useState([]);
     const [products, setProducts] = useState([]);
+
+    const checkIfMobileUser = agent => {
+        if (agent.includes('mobi')) {
+            return true
+        }
+        return false
+    }
+
+    let userAgent = navigator.userAgent.toLowerCase(),
+        userIsOnMobile = checkIfMobileUser(userAgent);
 
     const getTotalReceivedCost = () => {
         let totalCost = 0.00;
@@ -86,105 +97,115 @@ export const Summary = () => {
 
     return (
         <div className="summaryContainer">
-            <div className="scrollBox">
-                <table>
-                    <thead>
-                        <tr>
-                            <th className="tableLabel" colSpan='3'>Products Received</th>
-                        </tr>
-                        <tr>
-                            <th className="tableLabel" colSpan='3'>Total Cost: ${getTotalReceivedCost()}</th>
-                        </tr>
-                        <tr className="tableSubLabel">
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Cost</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {received.map(rec => {
-                            return <ReceivedCard key={rec.id} received={rec} />
-                        })}
-                    </tbody>
-                </table>
-            </div>
+            <Draggable disabled={userIsOnMobile}>
+                <div className="scrollBox">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className="tableLabel" colSpan='3'>Products Received</th>
+                            </tr>
+                            <tr>
+                                <th className="tableLabel" colSpan='3'>Total Cost: ${getTotalReceivedCost()}</th>
+                            </tr>
+                            <tr className="tableSubLabel">
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {received.map(rec => {
+                                return <ReceivedCard key={rec.id} received={rec} />
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </Draggable>
 
-            <div className="scrollBox">
-                <table>
-                    <thead>
-                        <tr>
-                            <th className="tableLabel" colSpan='3'>Products Sold</th>
-                        </tr>
-                        <tr>
-                            <th className="tableLabel" colSpan='3'>Total Income: ${getTotalSalesIncome()}</th>
-                        </tr>
-                        <tr className="tableSubLabel">
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Sold For</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {sales.map(sale => {
-                            return <SoldCard key={sale.id} sale={sale} />
-                        })}
-                    </tbody>
-                </table>
-            </div>
+            <Draggable disabled={userIsOnMobile}>
+                <div className="scrollBox">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className="tableLabel" colSpan='3'>Products Sold</th>
+                            </tr>
+                            <tr>
+                                <th className="tableLabel" colSpan='3'>Total Income: ${getTotalSalesIncome()}</th>
+                            </tr>
+                            <tr className="tableSubLabel">
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Sold For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sales.map(sale => {
+                                return <SoldCard key={sale.id} sale={sale} />
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </Draggable>
 
-            <div className="scrollBox">
-                <table>
-                    <thead>
-                        <tr>
-                            <th className="tableLabel" colSpan='3'>Shrinkage</th>
-                        </tr>
-                        <tr>
-                            <th className="tableLabel" colSpan='3'>Total Loss: ${getTotalShrinkLoss()}</th>
-                        </tr>
-                        <tr className="tableSubLabel">
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Cost</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {shrink.map(shr => {
-                            return <ShrinkCard key={shr.id} shrink={shr} />
-                        })}
-                    </tbody>
-                </table>
-            </div>
+            <Draggable disabled={userIsOnMobile}>
+                <div className="scrollBox">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className="tableLabel" colSpan='3'>Shrinkage</th>
+                            </tr>
+                            <tr>
+                                <th className="tableLabel" colSpan='3'>Total Loss: ${getTotalShrinkLoss()}</th>
+                            </tr>
+                            <tr className="tableSubLabel">
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {shrink.map(shr => {
+                                return <ShrinkCard key={shr.id} shrink={shr} />
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </Draggable>
 
             <div className="smallTables">
-                <div className="scrollBox">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th className="tableLabel">Net Profit(+) / Loss(-)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>$ {getNetGainOrLoss()}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <Draggable disabled={userIsOnMobile}>
+                    <div className="scrollBox">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th className="tableLabel">Net Profit(+) / Loss(-)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>$ {getNetGainOrLoss()}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </Draggable>
 
-                <div className="scrollBox">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th className="tableLabel">Current Inventory Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>$ {getOnHandValue()}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <Draggable disabled={userIsOnMobile}>
+                    <div className="scrollBox">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th className="tableLabel">Current Inventory Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>$ {getOnHandValue()}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </Draggable>
             </div>
         </div>
     )
